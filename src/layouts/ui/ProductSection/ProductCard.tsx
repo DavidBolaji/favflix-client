@@ -1,12 +1,11 @@
-import { Button, Rate } from 'antd';
-import React, { useState } from 'react';
+import { Button } from 'antd';
+import React from 'react';
 interface Iproduct {
   title: string;
   amount: number;
   img: string;
 }
 const ProductCard: React.FC<Iproduct> = ({ title, amount, img }) => {
-  const [value, setValue] = useState(3);
   //set
   return (
     <div className=" h-[300px]">

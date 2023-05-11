@@ -1,4 +1,4 @@
-import { Button, Col, Drawer, Grid, Menu, Row, Space } from 'antd';
+import { Col, Drawer, Grid, Menu, Row, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { FiLogIn, FiMenu } from 'react-icons/fi';
 import Wrapper from './Wrapper';

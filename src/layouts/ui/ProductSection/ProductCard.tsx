@@ -7,6 +7,7 @@ interface Iproduct {
 }
 const ProductCard: React.FC<Iproduct> = ({ title, amount, img }) => {
   const [value, setValue] = useState(3);
+  //set
   return (
     <div className=" h-[300px]">
       <div className="h-1/2 overflow-hidden rounded-md shadow">

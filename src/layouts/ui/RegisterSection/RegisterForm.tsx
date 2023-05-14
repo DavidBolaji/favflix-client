@@ -1,25 +1,47 @@
 import { Alert, Button, Input } from 'antd';
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import * as Yup from 'yup';
+import styled from '@emotion/styled';
+import 'react-phone-number-input/style.css';
+
+const StyledPhoneInput = styled(PhoneInput)`
+  input {
+    border-color: #d9d9d9;
+    border-width: 1;
+    outline: none;
+  }
+  background-color: #fff;
+
+  input[type='tel']:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #d9d9d9 !important;
+    border-width: 1 !important;
+    /* border: 1px solid #ededed !important; */
+  }
+  padding-left: 10px;
+`;
 
 const validationSchema = Yup.object().shape({
   fname: Yup.string()
     .min(3, 'First Name must be at least 3 characters long')
-    .required('First name is required field is required'),
+    .required('First name is a required field'),
   lname: Yup.string()
     .min(3, 'Last Name must be at least 3 characters long')
-    .required('First name is required field is required'),
+    .required('Last name is a required field'),
   gender: Yup.string()
     .oneOf(['male', 'female'], 'Gender must be male or female')
-    .required('Gender field is required'),
+    .required('Gender is a required field'),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Email is required'),
+    .required('Email is a required field'),
   password: Yup.string()
     .min(8, 'Password should be at least 8 characters')
-    .required('Password is required'),
+    .required('Password is a required field'),
+  phone: Yup.string().required('Phone is a required field'),
 });
 
 export interface IInputReg {
@@ -38,6 +60,12 @@ interface IRegister {
 
 const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
   const navigate = useNavigate();
+  const [phoneErr, setPhoneError] = useState('');
+  const [, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('reset');
+  }, [phoneErr]);
   return (
     <>
       <Formik
@@ -52,15 +80,17 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
           handleBlur,
           handleChange,
           handleSubmit,
+          setFieldValue,
         }) => {
           return (
             <>
-              <div className="flex w-full justify-end">
+              <div className="flex w-full justify-end ">
                 <Button onClick={() => navigate('/login')}>
                   Login Account
                 </Button>
               </div>
-              <form noValidate onSubmit={handleSubmit}>
+
+              <form noValidate onSubmit={handleSubmit} className="w-full">
                 <div className="w-full grid grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="fname">First Name</label>
@@ -135,23 +165,43 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
                   </div>
                   <div>
                     <label htmlFor="phone">Phone Number</label>
-                    <Input
-                      type="phone"
-                      name="phone"
+
+                    <StyledPhoneInput
                       value={values.phone}
-                      // placeholder={'Enter phone'}
-                      onChange={handleChange}
-                      size="large"
-                      onBlur={handleBlur}
-                      className="mb-3"
+                      international
+                      defaultCountry="NG"
+                      countryCallingCodeEditable={false}
+                      onChange={(value) => {
+                        setFieldValue('phone', value);
+                      }}
+                      onFocus={() => setPhoneError('')}
+                      onBlur={() => {
+                        console.log(values.phone);
+                        if (values.phone === '') {
+                          setPhoneError('Phone number is a required field.');
+                          setCount((prev) => prev + 1);
+                          return;
+                        }
+                        if (!isValidPhoneNumber(values.phone)) {
+                          setPhoneError('phone number is not valid');
+                          setCount((prev) => prev + 1);
+                          return;
+                        }
+                      }}
+                      className="hover:border-[#feb517] hover:border rounded-md mb-3 w-full bg-white border border-[#d9d9d9] py-2"
                     />
-                    {errors.phone && touched.phone && (
-                      <Alert
-                        message={errors.phone}
-                        closable
-                        type="error"
-                        showIcon
-                      />
+                    {phoneErr && (
+                      <>
+                        {touched.phone}
+                        {errors.phone}
+                        <Alert
+                          message={phoneErr}
+                          closable
+                          type="error"
+                          showIcon
+                          onClose={() => setPhoneError('')}
+                        />
+                      </>
                     )}
                   </div>
                 </div>

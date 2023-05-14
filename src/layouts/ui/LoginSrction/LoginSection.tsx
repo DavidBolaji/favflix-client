@@ -1,25 +1,30 @@
 import React from 'react';
 import { images } from '../../../constants/image';
 import LoginForm, { IInput } from './LoginForm';
-import { Carousel, Divider } from 'antd';
+import { Carousel, Divider, Grid } from 'antd';
 
+const { useBreakpoint } = Grid;
 interface Ihandler {
   setSubmiting: any;
   resetForm: () => void;
 }
 
 const LoginSection: React.FC = () => {
+  const screen = useBreakpoint();
   const handleSubmit = (values: IInput, { resetForm }: Ihandler) => {
     console.log(values);
     resetForm();
   };
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid md:grid-cols-2 grid-cols-1">
       <Carousel
         autoplay
         autoplaySpeed={8000}
         className="h-screen"
         dotPosition="right"
+        style={{
+          display: screen.lg ? 'block' : 'none',
+        }}
       >
         <div className="flex flex-1 items-center h-screen scale-75">
           <img

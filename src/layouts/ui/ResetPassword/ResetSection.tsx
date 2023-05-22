@@ -14,10 +14,10 @@ import { reset } from '../../../actions/userActions';
 
 const { useBreakpoint } = Grid;
 interface Ireset {
-  token: string;
+  token?: string;
 }
 
-const ResetSection: React.FC<Ireset> = ({ token }) => {
+const ResetSection: React.FC<Ireset> = () => {
   const screen = useBreakpoint();
   const dispatch: Dispatch<any> = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const ResetSection: React.FC<Ireset> = ({ token }) => {
   const handleSubmit = async (values: { password: string }) => {
     setLoading(true);
     dispatch(
-      reset({ ...values, token }, (cb, res) => {
+      reset({ ...values, token: 'avgrtytu' }, (cb, res) => {
         if (res === 'success') {
           // return message.success(cb);
           toast.success(cb, {

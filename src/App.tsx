@@ -19,6 +19,10 @@ const route = createBrowserRouter([
     ],
   },
   {
+    path: '/:id',
+    element: <Reset />,
+  },
+  {
     path: '/login',
     element: <Login />,
   },
@@ -31,8 +35,7 @@ const route = createBrowserRouter([
     element: <Forgot />,
   },
   {
-    path: '/reset/:token',
-    element: <Reset />,
+    path: '/reset/#token',
   },
 ]);
 function App() {

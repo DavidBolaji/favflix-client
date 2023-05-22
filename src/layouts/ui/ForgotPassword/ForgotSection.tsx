@@ -1,33 +1,27 @@
 import React from 'react';
 import { images } from '../../../constants/image';
-import { Carousel, Divider, Grid } from 'antd';
-import RegisterForm, { IInputReg } from './RegisterForm';
+
+import { Carousel, Grid } from 'antd';
 import { useDispatch } from 'react-redux';
-import { register } from '../../../actions/userActions';
-import { Dispatch } from 'redux';
+
 import { toast } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Dispatch } from 'redux';
+// import { useNavigate } from 'react-router-dom';
+import ForgotPasswordForm from './ForgotPasswprdForm';
+import { forgot } from '../../../actions/userActions';
+
 const { useBreakpoint } = Grid;
 
-interface Ihandler {
-  setSubmiting: any;
-  resetForm: () => void;
-}
-
-const RegisterSection: React.FC = () => {
+const ForgotSection: React.FC = () => {
   const screen = useBreakpoint();
   const dispatch: Dispatch<any> = useDispatch();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const redirectPath = queryParams.get('redirect');
-  const amount = queryParams.get('amount');
-  const navigate = useNavigate();
-  const handleSubmit = async (values: IInputReg, { resetForm }: Ihandler) => {
+
+  const handleSubmit = async (values: { email: string }) => {
     dispatch(
-      register({ ...values }, (cb, res) => {
+      forgot({ ...values }, (cb, res) => {
         if (res === 'success') {
           // return message.success(cb);
-          toast.success(cb, {
+          return toast.success(cb, {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -37,16 +31,9 @@ const RegisterSection: React.FC = () => {
             progress: undefined,
             theme: 'light',
           });
-          if (redirectPath === 'checkout') {
-            return navigate({
-              pathname: '/checkout',
-              search: `?amount=${amount}`,
-            });
-          }
-          return navigate('/');
         }
 
-        toast.error(cb, {
+        return toast.error(cb, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -58,21 +45,19 @@ const RegisterSection: React.FC = () => {
         });
       })
     );
-
-    resetForm();
   };
   return (
     <div className="grid md:grid-cols-2 grid-cols-1">
       <Carousel
         autoplay
         autoplaySpeed={8000}
-        className="md:h-screen md:block hidden"
+        className="h-screen"
         dotPosition="right"
         style={{
           display: screen.lg ? 'block' : 'none',
         }}
       >
-        <div className="md:flex flex-1 items-center h-screen scale-75">
+        <div className="flex flex-1 items-center h-screen scale-75">
           <img
             src={images.NoMarket}
             alt={'market'}
@@ -109,24 +94,16 @@ const RegisterSection: React.FC = () => {
             alt="logo-favfleeks"
           />
         </div>
-        <RegisterForm
-          initialValues={{
-            email: '',
-            password: '',
-            fname: '',
-            lname: '',
-            gender: '',
-            phone: '',
-            isAdmin: false,
-          }}
+        <ForgotPasswordForm
+          initialValues={{ email: '' }}
           onSubmit={handleSubmit}
         />
-        <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">
-          or Register with{' '}
-        </Divider>
+        {/* <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">
+          or login with{' '}
+        </Divider> */}
       </div>
     </div>
   );
 };
 
-export default RegisterSection;
+export default ForgotSection;

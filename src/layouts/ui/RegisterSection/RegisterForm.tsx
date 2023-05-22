@@ -1,13 +1,13 @@
 import { Alert, Button, Input } from 'antd';
 import { Formik } from 'formik';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import * as Yup from 'yup';
 import styled from '@emotion/styled';
 import 'react-phone-number-input/style.css';
 
-const StyledPhoneInput = styled(PhoneInput)`
+export const StyledPhoneInput = styled(PhoneInput)`
   input {
     border-color: #d9d9d9;
     border-width: 1;
@@ -51,6 +51,7 @@ export interface IInputReg {
   lname: string;
   gender: string;
   phone: string;
+  isAdmin: boolean;
 }
 
 interface IRegister {
@@ -59,6 +60,10 @@ interface IRegister {
 }
 
 const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const redirectPath = queryParams.get('redirect');
+  const amount = queryParams.get('amount');
   const navigate = useNavigate();
   const [phoneErr, setPhoneError] = useState('');
   const [, setCount] = useState(0);
@@ -85,13 +90,23 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
           return (
             <>
               <div className="flex w-full justify-end ">
-                <Button onClick={() => navigate('/login')}>
+                <Button
+                  onClick={() => {
+                    if (redirectPath === 'checkout') {
+                      return navigate({
+                        pathname: '/login',
+                        search: `?redirect=${redirectPath}&amount=${amount}`,
+                      });
+                    }
+                    return navigate('/login');
+                  }}
+                >
                   Login Account
                 </Button>
               </div>
 
               <form noValidate onSubmit={handleSubmit} className="w-full">
-                <div className="w-full grid grid-cols-2 gap-3">
+                <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-3">
                   <div>
                     <label htmlFor="fname">First Name</label>
                     <Input
@@ -135,7 +150,7 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
                     )}
                   </div>
                 </div>
-                <div className="w-full grid grid-cols-2 gap-3">
+                <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-3">
                   <div>
                     <label htmlFor="gender">Gender</label> <br />
                     <select
@@ -176,7 +191,6 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
                       }}
                       onFocus={() => setPhoneError('')}
                       onBlur={() => {
-                        console.log(values.phone);
                         if (values.phone === '') {
                           setPhoneError('Phone number is a required field.');
                           setCount((prev) => prev + 1);

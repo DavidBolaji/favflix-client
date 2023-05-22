@@ -10,23 +10,29 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "antd": "^5.4.7",
+    "antd-token-previewer": "^2.0.0-alpha.6",
+    "axios": "^1.4.0",
     "consola": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-paystack": "^4.0.3",
     "react-phone-number-input": "^3.2.23",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
+    "react-step-wizard": "^5.3.11",
     "react-toastify": "^9.1.2",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
-    "styled-components": "^6.0.0-rc.1"
+    "styled-components": "^6.0.0-rc.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

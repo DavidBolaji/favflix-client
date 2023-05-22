@@ -2,18 +2,58 @@ import React from 'react';
 import { images } from '../../../constants/image';
 import LoginForm, { IInput } from './LoginForm';
 import { Carousel, Divider, Grid } from 'antd';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../../actions/userActions';
+import { toast } from 'react-toastify';
+import { Dispatch } from 'redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const { useBreakpoint } = Grid;
-interface Ihandler {
-  setSubmiting: any;
-  resetForm: () => void;
-}
 
 const LoginSection: React.FC = () => {
   const screen = useBreakpoint();
-  const handleSubmit = (values: IInput, { resetForm }: Ihandler) => {
-    console.log(values);
-    resetForm();
+  const dispatch: Dispatch<any> = useDispatch();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const redirectPath = queryParams.get('redirect');
+  const amount = queryParams.get('amount');
+  const navigate = useNavigate();
+  const handleSubmit = async (values: IInput) => {
+    dispatch(
+      signin({ ...values }, (cb, res) => {
+        if (res === 'success') {
+          // return message.success(cb);
+          toast.success(cb, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          });
+          if (redirectPath === 'checkout') {
+            return navigate({
+              pathname: '/checkout',
+              search: `?amount=${amount}`,
+            });
+          }
+          return navigate('/');
+        }
+
+        return toast.error(cb, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      })
+    );
   };
   return (
     <div className="grid md:grid-cols-2 grid-cols-1">
@@ -56,6 +96,13 @@ const LoginSection: React.FC = () => {
         </div>
       </Carousel>
       <div className="md:px-20 px-5 flex items-center justify-center flex-col bg-[#fcfcfc] h-screen">
+        <div>
+          <img
+            src={images.Logo}
+            className="md:w-16 w-32"
+            alt="logo-favfleeks"
+          />
+        </div>
         <LoginForm
           initialValues={{ email: '', password: '' }}
           onSubmit={handleSubmit}

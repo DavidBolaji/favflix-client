@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 button:hover {
   color: black !important;
 }
+
+.ant-drawer-content {
+  height: auto !important;
+}
+
+.hidden {
+  display: none;
+}
+
+/* button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; 
+  background-color: transparent !important; 
+   background-image: none; 
+}  */

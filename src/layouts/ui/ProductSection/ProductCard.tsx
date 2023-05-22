@@ -1,11 +1,30 @@
 import { Button } from 'antd';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addToCart } from '../../../actions/cartActions';
+import { toast } from 'react-toastify';
 interface Iproduct {
+  id: string;
   title: string;
   amount: number;
   img: string;
 }
-const ProductCard: React.FC<Iproduct> = ({ title, amount, img }) => {
+const ProductCard: React.FC<Iproduct> = ({ title, amount, img, id }) => {
+  const dispatch: Dispatch<any> = useDispatch();
+  const handleClick = () => {
+    dispatch(addToCart({ _id: id, title, amount, qty: 1, img }));
+    toast.success('Item added to cart', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
   //set
   return (
     <div className=" h-[300px]">
@@ -22,7 +41,7 @@ const ProductCard: React.FC<Iproduct> = ({ title, amount, img }) => {
               currency: 'NGN',
             }).format(amount)}
           </h4>
-          <Button>Add to Cart</Button>
+          <Button onClick={handleClick}>Add to Cart</Button>
         </div>
       </div>
     </div>

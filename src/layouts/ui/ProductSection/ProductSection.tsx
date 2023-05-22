@@ -1,49 +1,58 @@
-import React from 'react';
-import { images } from '../../../constants/image';
+import React, { useEffect } from 'react';
 import ProductCard from './ProductCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../actions/productAction';
+import { Dispatch } from 'redux';
+import { Alert, Spin } from 'antd';
 
-const datas = [
-  {
-    id: '1',
-    title: 'Title',
-    amount: 1000,
-    img: images.Tomatoes,
-  },
-  {
-    id: '2',
-    title: 'Title',
-    amount: 12700,
-    img: images.Fish,
-  },
-  {
-    id: '3',
-    title: 'Title',
-    amount: 199900,
-    img: images.Ewedu,
-  },
-  {
-    id: '4',
-    title: 'Title',
-    amount: 1084630,
-    img: images.Pepper,
-  },
-];
+interface Product {
+  _id: string;
+  uId: string;
+  title: string;
+  amount: number;
+  img: string;
+}
 
 const ProductSection: React.FC = () => {
-  const productList = datas.map((data) => {
-    return (
-      <ProductCard
-        title={data.title}
-        amount={data.amount}
-        key={data.id}
-        img={data.img}
-      />
-    );
-  });
+  const dispatch: Dispatch<any> = useDispatch();
+  const prodList = useSelector((state: any) => state.productList);
+  const { loading, error, products } = prodList;
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <section className="w-full">
       <h3 className="font-bold text-2xl">PRODUCTS</h3>
-      <div className="grid md:grid-cols-4 md:gap-10">{productList}</div>
+      <div className="grid md:grid-cols-4 md:gap-10">
+        {loading && (
+          <div className="flex w-full items-center justify-center">
+            <Spin />
+          </div>
+        )}
+        {error && (
+          <Alert
+            message="Error"
+            description={error}
+            type="error"
+            showIcon
+            closable
+          />
+        )}
+        {!loading &&
+          products.map((data: Product) => {
+            return (
+              <ProductCard
+                id={data._id}
+                title={data.title}
+                amount={data.amount}
+                key={data._id}
+                img={data.img}
+              />
+            );
+          })}
+      </div>
     </section>
   );
 };

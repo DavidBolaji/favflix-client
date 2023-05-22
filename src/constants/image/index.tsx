@@ -8,6 +8,8 @@ import Pepper from '../../assets/pepper.jpg';
 import Tomatoes from '../../assets/tomatoes.jpg';
 import Speedy from '../../assets/speedy.png';
 import NoMarket from '../../assets/no_market.png';
+import Logo from '../../assets/logo.png';
+// import AvatarCustom from 'https://www.asiamediajournal.com/wp-content/uploads/2022/11/Default-PFP-profile-287x300.png';
 
 export const images = {
   Banner1,
@@ -20,4 +22,6 @@ export const images = {
   Tomatoes,
   Speedy,
   NoMarket,
+  Logo,
+  // AvatarCustom,
 };

@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import StepWizard from 'react-step-wizard';
-import { Input, Alert } from 'antd';
+import { Input, Alert, Spin } from 'antd';
 import { StyledPhoneInput } from '../RegisterSection/RegisterForm';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import * as Yup from 'yup';
@@ -15,11 +15,14 @@ import { PaystackConsumer } from 'react-paystack';
 // import { clearCart } from '../../../actions/cartActions';
 import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../../../actions/cartActions';
+import { SyncOutlined } from '@ant-design/icons';
 
 const validationSchema = Yup.object().shape({
   address: Yup.string().required('Address is a required field'),
   phone: Yup.string().required('Phone is a required field'),
 });
+
+const antIcon = <SyncOutlined spin />;
 
 const PurchaseComponent: React.FC = () => {
   const [SW, setSW] = useState<any>(null);
@@ -37,6 +40,7 @@ const PurchaseComponent: React.FC = () => {
   const address: { phone: string; address: string; email: string } =
     useSelector((state: any) => state.address.address);
   const [calb, setCalb] = useState('');
+  const [loading, setLoading] = useState(false);
   const [, setCount] = useState(0);
   const dispatch: Dispatch<any> = useDispatch();
   const user = useSelector((state: any) => state.user.user);
@@ -55,6 +59,7 @@ const PurchaseComponent: React.FC = () => {
   );
 
   const onSuccess = () => {
+    setLoading(false);
     // Implementation for whatever you want to do with reference and after success call.
     toast.success('Payment succesfull', {
       position: 'top-right',
@@ -108,6 +113,7 @@ const PurchaseComponent: React.FC = () => {
 
   // you can call this function anything
   const onClose = () => {
+    setLoading(false);
     // implementation for  whatever you want to do when the Paystack dialog closed.
     console.log('reference');
   };
@@ -121,7 +127,7 @@ const PurchaseComponent: React.FC = () => {
 
   const handleSubmit = (values: any) => {
     // let valid = typeof value !== "undefined" && address !== "";
-
+    setLoading(true);
     dispatch(
       saveAddress({
         email: user.email,
@@ -129,10 +135,12 @@ const PurchaseComponent: React.FC = () => {
         address: values.address,
       })
     );
+    setLoading(false);
     SW?.nextStep();
   };
 
   const order = () => {
+    setLoading(true);
     dispatch(
       createOrders(
         {
@@ -157,10 +165,12 @@ const PurchaseComponent: React.FC = () => {
             });
 
             setCalb(cb);
+            setLoading(false);
 
             return SW?.nextStep();
           }
 
+          setLoading(false);
           return toast.error(cb, {
             position: 'top-right',
             autoClose: 5000,
@@ -201,6 +211,7 @@ const PurchaseComponent: React.FC = () => {
                 handleSubmit,
                 setFieldValue,
                 setFieldError,
+                isSubmitting,
                 values,
               }) => {
                 return (
@@ -275,7 +286,7 @@ const PurchaseComponent: React.FC = () => {
                         //   onClick={SW?.nextStep}
                         className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                       >
-                        Save
+                        {isSubmitting ? <Spin indicator={antIcon} /> : 'Save'}
                       </button>
                     </div>
                   </form>
@@ -308,7 +319,7 @@ const PurchaseComponent: React.FC = () => {
                 onClick={order}
                 className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
               >
-                Next
+                {loading ? <Spin indicator={antIcon} /> : 'Next'}
               </button>
             </div>
           </div>
@@ -336,11 +347,12 @@ const PurchaseComponent: React.FC = () => {
                   <button
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                     onClick={() => {
+                      setLoading(true);
                       initializePayment(onSuccess, onClose);
                       setCount((prev) => prev + 1);
                     }}
                   >
-                    Pay {total}
+                    {loading ? <Spin indicator={antIcon} /> : 'Pay ' + total}
                   </button>
                 )}
               </PaystackConsumer>

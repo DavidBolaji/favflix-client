@@ -1,4 +1,5 @@
-import { Alert, Button, Input } from 'antd';
+import { SyncOutlined } from '@ant-design/icons';
+import { Alert, Button, Input, Spin } from 'antd';
 import { Formik } from 'formik';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -22,6 +23,8 @@ interface Ilogin {
   onSubmit: (arg: IInput, val: any) => void;
   initialValues: IInput;
 }
+
+const antIcon = <SyncOutlined spin />;
 
 const LoginForm: React.FC<Ilogin> = ({ onSubmit, initialValues }) => {
   const location = useLocation();
@@ -121,7 +124,7 @@ const LoginForm: React.FC<Ilogin> = ({ onSubmit, initialValues }) => {
                     disabled={isSubmitting}
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
-                    Login
+                    {isSubmitting ? <Spin indicator={antIcon} /> : 'Login'}
                   </button>
                 </div>
               </form>

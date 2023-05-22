@@ -1,4 +1,4 @@
-import { Alert, Button, Input } from 'antd';
+import { Alert, Button, Input, Spin } from 'antd';
 import { Formik } from 'formik';
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import * as Yup from 'yup';
 import styled from '@emotion/styled';
 import 'react-phone-number-input/style.css';
+import { SyncOutlined } from '@ant-design/icons';
 
 export const StyledPhoneInput = styled(PhoneInput)`
   input {
@@ -59,6 +60,8 @@ interface IRegister {
   initialValues: IInputReg;
 }
 
+const antIcon = <SyncOutlined spin />;
+
 const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -86,6 +89,7 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
           handleChange,
           handleSubmit,
           setFieldValue,
+          isSubmitting,
         }) => {
           return (
             <>
@@ -267,7 +271,7 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
                     type="submit"
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
-                    Register
+                    {isSubmitting ? <Spin indicator={antIcon} /> : 'Register'}
                   </button>
                 </div>
               </form>

@@ -1,5 +1,5 @@
 import { Badge, Grid } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 

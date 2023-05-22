@@ -22,11 +22,16 @@ export interface IInput {
 interface Ilogin {
   onSubmit: (arg: IInput, val: any) => void;
   initialValues: IInput;
+  isSubmitting: boolean;
 }
 
-const antIcon = <SyncOutlined spin />;
+const antIcon = <SyncOutlined twoToneColor="#52c41a" spin />;
 
-const LoginForm: React.FC<Ilogin> = ({ onSubmit, initialValues }) => {
+const LoginForm: React.FC<Ilogin> = ({
+  onSubmit,
+  initialValues,
+  isSubmitting,
+}) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const redirectPath = queryParams.get('redirect');
@@ -46,7 +51,6 @@ const LoginForm: React.FC<Ilogin> = ({ onSubmit, initialValues }) => {
           handleBlur,
           handleChange,
           handleSubmit,
-          isSubmitting,
         }) => {
           return (
             <>
@@ -122,6 +126,10 @@ const LoginForm: React.FC<Ilogin> = ({ onSubmit, initialValues }) => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
+                    style={{
+                      backgroundColor: isSubmitting ? '#fafafa' : '',
+                      border: isSubmitting ? '1px solid #feb517' : '',
+                    }}
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {isSubmitting ? <Spin indicator={antIcon} /> : 'Login'}

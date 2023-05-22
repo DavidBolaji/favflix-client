@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { images } from '../../../constants/image';
 import { Carousel, Divider, Grid } from 'antd';
 import RegisterForm, { IInputReg } from './RegisterForm';
@@ -19,10 +19,12 @@ const RegisterSection: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const [loading, setLoading] = useState(false);
   const redirectPath = queryParams.get('redirect');
   const amount = queryParams.get('amount');
   const navigate = useNavigate();
   const handleSubmit = async (values: IInputReg, { resetForm }: Ihandler) => {
+    setLoading(true);
     dispatch(
       register({ ...values }, (cb, res) => {
         if (res === 'success') {
@@ -37,12 +39,15 @@ const RegisterSection: React.FC = () => {
             progress: undefined,
             theme: 'light',
           });
+          setLoading(false);
           if (redirectPath === 'checkout') {
+            setLoading(false);
             return navigate({
               pathname: '/checkout',
               search: `?amount=${amount}`,
             });
           }
+
           return navigate('/');
         }
 
@@ -120,6 +125,7 @@ const RegisterSection: React.FC = () => {
             isAdmin: false,
           }}
           onSubmit={handleSubmit}
+          isSubmitting={loading}
         />
         <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">
           or Register with{' '}

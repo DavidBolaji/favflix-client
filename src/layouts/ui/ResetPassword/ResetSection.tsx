@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { images } from '../../../constants/image';
 
 import { Carousel, Grid } from 'antd';
@@ -21,8 +21,10 @@ const ResetSection: React.FC<Ireset> = ({ token }) => {
   const screen = useBreakpoint();
   const dispatch: Dispatch<any> = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values: { password: string }) => {
+    setLoading(true);
     dispatch(
       reset({ ...values, token }, (cb, res) => {
         if (res === 'success') {
@@ -37,6 +39,7 @@ const ResetSection: React.FC<Ireset> = ({ token }) => {
             progress: undefined,
             theme: 'light',
           });
+          setLoading(false);
           return navigate('/login');
         }
 
@@ -50,6 +53,7 @@ const ResetSection: React.FC<Ireset> = ({ token }) => {
           progress: undefined,
           theme: 'light',
         });
+        setLoading(false);
         return navigate('/forgot');
       })
     );
@@ -105,6 +109,7 @@ const ResetSection: React.FC<Ireset> = ({ token }) => {
         <ResetPasswordForm
           initialValues={{ password: '' }}
           onSubmit={handleSubmit}
+          isSubmitting={loading}
         />
         {/* <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">
           or login with{' '}

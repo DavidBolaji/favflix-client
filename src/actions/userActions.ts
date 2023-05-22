@@ -98,9 +98,11 @@ export const forgot =
         import.meta.env.VITE_PUBLIC_KEY
       );
 
-      console.log(req);
-
-      cb(res.data.message, 'success');
+      if (req.status === 200) {
+        cb(res.data.message, 'success');
+      } else {
+        cb('something went wrong', 'error');
+      }
     } catch (err: any) {
       dispatch({
         type: USER_FAILED,

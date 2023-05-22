@@ -115,7 +115,16 @@ const PurchaseComponent: React.FC = () => {
   const onClose = () => {
     setLoading(false);
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('reference');
+    toast.error('Payment Error', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
   };
 
   const componentProps = {
@@ -135,6 +144,7 @@ const PurchaseComponent: React.FC = () => {
         address: values.address,
       })
     );
+
     setLoading(false);
     SW?.nextStep();
   };
@@ -211,7 +221,7 @@ const PurchaseComponent: React.FC = () => {
                 handleSubmit,
                 setFieldValue,
                 setFieldError,
-                isSubmitting,
+
                 values,
               }) => {
                 return (
@@ -268,8 +278,6 @@ const PurchaseComponent: React.FC = () => {
                       />
                       {errors.phone && touched.phone && (
                         <>
-                          {touched.phone}
-                          {errors.phone}
                           <Alert
                             message={errors.phone}
                             closable
@@ -283,10 +291,14 @@ const PurchaseComponent: React.FC = () => {
                     <div className="w-full">
                       <button
                         type="submit"
+                        style={{
+                          backgroundColor: loading ? '#fafafa' : '',
+                          border: loading ? '1px solid #feb517' : '',
+                        }}
                         //   onClick={SW?.nextStep}
                         className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                       >
-                        {isSubmitting ? <Spin indicator={antIcon} /> : 'Save'}
+                        {loading ? <Spin indicator={antIcon} /> : 'Save'}
                       </button>
                     </div>
                   </form>
@@ -345,6 +357,10 @@ const PurchaseComponent: React.FC = () => {
               <PaystackConsumer {...componentProps}>
                 {({ initializePayment }) => (
                   <button
+                    style={{
+                      backgroundColor: loading ? '#fafafa' : '',
+                      border: loading ? '1px solid #feb517' : '',
+                    }}
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                     onClick={() => {
                       setLoading(true);

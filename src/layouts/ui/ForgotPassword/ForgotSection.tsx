@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { images } from '../../../constants/image';
 
 import { Carousel, Grid } from 'antd';
@@ -15,12 +15,15 @@ const { useBreakpoint } = Grid;
 const ForgotSection: React.FC = () => {
   const screen = useBreakpoint();
   const dispatch: Dispatch<any> = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values: { email: string }) => {
+    setLoading(true);
     dispatch(
       forgot({ ...values }, (cb, res) => {
         if (res === 'success') {
           // return message.success(cb);
+          setLoading(false);
           return toast.success(cb, {
             position: 'top-right',
             autoClose: 5000,
@@ -33,6 +36,7 @@ const ForgotSection: React.FC = () => {
           });
         }
 
+        setLoading(false);
         return toast.error(cb, {
           position: 'top-right',
           autoClose: 5000,
@@ -97,6 +101,7 @@ const ForgotSection: React.FC = () => {
         <ForgotPasswordForm
           initialValues={{ email: '' }}
           onSubmit={handleSubmit}
+          isSubmitting={loading}
         />
         {/* <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">
           or login with{' '}

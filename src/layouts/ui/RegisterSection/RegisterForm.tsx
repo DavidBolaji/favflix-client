@@ -58,11 +58,16 @@ export interface IInputReg {
 interface IRegister {
   onSubmit: (arg: IInputReg, val: any) => void;
   initialValues: IInputReg;
+  isSubmitting: boolean;
 }
 
 const antIcon = <SyncOutlined spin />;
 
-const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
+const RegisterForm: React.FC<IRegister> = ({
+  onSubmit,
+  initialValues,
+  isSubmitting,
+}) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const redirectPath = queryParams.get('redirect');
@@ -89,7 +94,6 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
           handleChange,
           handleSubmit,
           setFieldValue,
-          isSubmitting,
         }) => {
           return (
             <>
@@ -269,6 +273,10 @@ const RegisterForm: React.FC<IRegister> = ({ onSubmit, initialValues }) => {
                 <div className="w-full">
                   <button
                     type="submit"
+                    style={{
+                      backgroundColor: isSubmitting ? '#fafafa' : '',
+                      border: isSubmitting ? '1px solid #feb517' : '',
+                    }}
                     className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {isSubmitting ? <Spin indicator={antIcon} /> : 'Register'}

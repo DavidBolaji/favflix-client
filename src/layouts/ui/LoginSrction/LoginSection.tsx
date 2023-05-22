@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { images } from '../../../constants/image';
 import LoginForm, { IInput } from './LoginForm';
 import { Carousel, Divider, Grid } from 'antd';
@@ -17,8 +17,11 @@ const LoginSection: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
   const redirectPath = queryParams.get('redirect');
   const amount = queryParams.get('amount');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (values: IInput) => {
+    setLoading(true);
+
     dispatch(
       signin({ ...values }, (cb, res) => {
         if (res === 'success') {
@@ -33,6 +36,7 @@ const LoginSection: React.FC = () => {
             progress: undefined,
             theme: 'light',
           });
+          setLoading(false);
           if (redirectPath === 'checkout') {
             return navigate({
               pathname: '/checkout',
@@ -41,7 +45,7 @@ const LoginSection: React.FC = () => {
           }
           return navigate('/');
         }
-
+        setLoading(false);
         return toast.error(cb, {
           position: 'top-right',
           autoClose: 5000,
@@ -54,6 +58,7 @@ const LoginSection: React.FC = () => {
         });
       })
     );
+    setLoading(false);
   };
   return (
     <div className="grid md:grid-cols-2 grid-cols-1">
@@ -105,6 +110,7 @@ const LoginSection: React.FC = () => {
         </div>
         <LoginForm
           initialValues={{ email: '', password: '' }}
+          isSubmitting={loading}
           onSubmit={handleSubmit}
         />
         <Divider plain className="uppercase inline-block text-[#c9c9c9] mt-10">

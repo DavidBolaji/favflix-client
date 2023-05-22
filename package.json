@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.0",
+    "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,6 +20,7 @@
     "antd-token-previewer": "^2.0.0-alpha.6",
     "axios": "^1.4.0",
     "consola": "^3.1.0",
+    "emailjs": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",

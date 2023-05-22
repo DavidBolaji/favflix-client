@@ -3,6 +3,7 @@ import { REQUEST, USER_FAILED, USER_SUCCESS } from '../constants/constants';
 import { IInputReg } from '../layouts/ui/RegisterSection/RegisterForm';
 import Axios from '../auth/api';
 import { IInput } from '../layouts/ui/LoginSrction/LoginForm';
+import { send } from '@emailjs/browser';
 
 export const register =
   (values: IInputReg, cb: (res: string, state: string) => void) =>
@@ -85,6 +86,20 @@ export const forgot =
         type: USER_SUCCESS,
         payload: res.data.data,
       });
+      const req = await send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        {
+          link: res.data.data.link,
+          from_name: 'Fav-Fleks',
+          to_email: values.email,
+          username: values.email,
+        },
+        import.meta.env.VITE_PUBLIC_KEY
+      );
+
+      console.log(req);
+
       cb(res.data.message, 'success');
     } catch (err: any) {
       dispatch({

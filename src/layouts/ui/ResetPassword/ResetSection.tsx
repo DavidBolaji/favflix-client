@@ -9,7 +9,7 @@ import { Dispatch } from 'redux';
 // import { useNavigate } from 'react-router-dom';
 
 import ResetPasswordForm from './ResetPasswprdForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { reset } from '../../../actions/userActions';
 
 const { useBreakpoint } = Grid;
@@ -23,10 +23,12 @@ const ResetSection: React.FC<Ireset> = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const { id } = useParams();
+
   const handleSubmit = async (values: { password: string }) => {
     setLoading(true);
     dispatch(
-      reset({ ...values, token: 'avgrtytu' }, (cb, res) => {
+      reset({ ...values, token: id! }, (cb, res) => {
         if (res === 'success') {
           // return message.success(cb);
           toast.success(cb, {

@@ -47,7 +47,11 @@ const ForgotPasswordForm: React.FC<Ilogin> = ({
           return (
             <>
               <div className="flex w-full justify-end">
-                <Button onClick={() => navigate('/register')}>
+                <Button
+                  className="text-[#cb104a]"
+                  color="#cb104a"
+                  onClick={() => navigate('/register')}
+                >
                   Create An Account
                 </Button>
               </div>
@@ -80,9 +84,9 @@ const ForgotPasswordForm: React.FC<Ilogin> = ({
                     disabled={isSubmitting}
                     style={{
                       backgroundColor: isSubmitting ? '#fafafa' : '',
-                      border: isSubmitting ? '1px solid #feb517' : '',
+                      border: isSubmitting ? '1px solid #cb104a' : '',
                     }}
-                    className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                    className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {isSubmitting ? <Spin indicator={antIcon} /> : 'Reset'}
                   </button>

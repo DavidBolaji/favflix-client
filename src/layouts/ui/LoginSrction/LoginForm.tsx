@@ -56,6 +56,8 @@ const LoginForm: React.FC<Ilogin> = ({
             <>
               <div className="flex w-full justify-end">
                 <Button
+                  color="#cb104a"
+                  className="text-[#cb104a]"
                   onClick={() => {
                     if (redirectPath === 'checkout') {
                       return navigate({
@@ -125,12 +127,12 @@ const LoginForm: React.FC<Ilogin> = ({
                 <div className="w-full">
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    // disabled={isSubmitting}
                     style={{
                       backgroundColor: isSubmitting ? '#fafafa' : '',
-                      border: isSubmitting ? '1px solid #feb517' : '',
+                      border: isSubmitting ? '1px solid #cb104a' : '',
                     }}
-                    className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                    className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {isSubmitting ? <Spin indicator={antIcon} /> : 'Login'}
                   </button>

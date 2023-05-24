@@ -18,14 +18,14 @@ interface Icard {
 export const CartCard: React.FC<Icard> = ({ item, checkout = true }) => {
   const dispatch: Dispatch<any> = useDispatch();
   return (
-    <div className="group relative shadow mb-2 bg-white z-30">
+    <div className="group relative shadow border  mb-2 bg-white z-30 ">
       <Badge.Ribbon
         placement={`${!checkout ? 'end' : 'start'}`}
         text={`${new Intl.NumberFormat('en-NG', {
           style: 'currency',
           currency: 'NGN',
         }).format(item.amount)} * ${item.qty}`}
-        color="gold"
+        color="magenta"
       >
         <div className="flex">
           <img

@@ -41,7 +41,7 @@ const ProductSection: React.FC = () => {
           />
         )}
         {!loading &&
-          products.map((data: Product) => {
+          products?.map((data: Product) => {
             return (
               <ProductCard
                 id={data._id}

@@ -23,13 +23,18 @@ const ProductCard: React.FC<Iproduct> = ({ title, amount, img, id }) => {
       draggable: true,
       progress: undefined,
       theme: 'light',
+      className: 'bg-[#cb104a]',
     });
   };
   //set
   return (
     <div className=" h-[300px]">
       <div className="h-1/2 overflow-hidden rounded-md shadow">
-        <img src={img} alt={title} className="w-full h-full object-cover" />
+        <img
+          src={img}
+          alt={title}
+          className="w-full h-full object-scale-down"
+        />
       </div>
       <div className="mt-4">
         <h4 className="font-bold ">{title}</h4>

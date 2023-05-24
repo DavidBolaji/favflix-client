@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-button:hover {
-  color: black !important;
-}
-
 .ant-drawer-content {
   height: auto !important;
 }

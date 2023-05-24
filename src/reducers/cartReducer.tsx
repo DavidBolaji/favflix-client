@@ -31,14 +31,14 @@ export const cartReducer = (
       const item: IcartItems = action.payload;
 
       const existItem = state.cartItems.find(
-        (x: IcartItems) => x._id === item._id
+        (x: IcartItems) => x?._id === item?._id
       );
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x: IcartItems) =>
-            x._id === existItem._id ? { ...item, qty: item.qty! + x.qty! } : x
+            x._id === existItem?._id ? { ...item, qty: item.qty! + x.qty! } : x
           ),
         };
       } else {

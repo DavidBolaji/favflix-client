@@ -108,6 +108,8 @@ const RegisterForm: React.FC<IRegister> = ({
                     }
                     return navigate('/login');
                   }}
+                  className="text-[#cb104a]"
+                  color="#cb104a"
                 >
                   Login Account
                 </Button>
@@ -171,7 +173,7 @@ const RegisterForm: React.FC<IRegister> = ({
                       onChange={handleChange}
                       name="gender"
                       onBlur={handleBlur}
-                      className="pl-3 hover:border-[#feb517] rounded-md mb-3 w-full bg-white bottom-2 border-[#d9d9d9] py-2"
+                      className="pl-3 hover:border-[#cb104a] rounded-md mb-3 w-full bg-white bottom-2 border-[#d9d9d9] py-2"
                     >
                       <option value=""></option>
                       <option value="male">Male</option>
@@ -210,7 +212,7 @@ const RegisterForm: React.FC<IRegister> = ({
                           return;
                         }
                       }}
-                      className="hover:border-[#feb517] hover:border rounded-md mb-3 w-full bg-white border border-[#d9d9d9] py-2"
+                      className="hover:border-[#cb104a] hover:border rounded-md mb-3 w-full bg-white border border-[#d9d9d9] py-2"
                     />
                     {phoneErr && (
                       <>
@@ -275,9 +277,9 @@ const RegisterForm: React.FC<IRegister> = ({
                     type="submit"
                     style={{
                       backgroundColor: isSubmitting ? '#fafafa' : '',
-                      border: isSubmitting ? '1px solid #feb517' : '',
+                      border: isSubmitting ? '1px solid #cb104a' : '',
                     }}
-                    className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                    className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {isSubmitting ? <Spin indicator={antIcon} /> : 'Register'}
                   </button>

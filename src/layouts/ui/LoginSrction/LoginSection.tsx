@@ -19,6 +19,7 @@ const LoginSection: React.FC = () => {
   const amount = queryParams.get('amount');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (values: IInput) => {
     setLoading(true);
 
@@ -58,7 +59,6 @@ const LoginSection: React.FC = () => {
         });
       })
     );
-    setLoading(false);
   };
   return (
     <div className="grid md:grid-cols-2 grid-cols-1">

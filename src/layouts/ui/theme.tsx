@@ -1,5 +1,5 @@
 export const theme = {
   token: {
-    colorPrimary: '#fdc729',
+    colorPrimary: '#cb104a',
   },
 };

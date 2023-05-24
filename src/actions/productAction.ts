@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import Axios from '../auth/api';
 import {
   PRODUCT_LIST_ERROR,
+  PRODUCT_LIST_REMOVE_SUCCESS,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
 } from '../constants/constants';
@@ -38,11 +39,12 @@ export const createProducts =
         amount,
         title,
       });
-      dispatch({
-        type: PRODUCT_LIST_SUCCESS,
-        payload: data.data,
-      });
-      cb(data.message, 'success');
+
+      // dispatch({
+      //   type: PRODUCT_LIST_SUCCESS,
+      //   payload: data?.data,
+      // });
+      return cb(data.message, 'success');
     } catch (err: any) {
       dispatch({
         type: PRODUCT_LIST_ERROR,
@@ -60,8 +62,9 @@ export const deleteProduct =
     });
     try {
       const { data } = await Axios.delete(`/product/delete/${id}`);
+
       dispatch({
-        type: PRODUCT_LIST_SUCCESS,
+        type: PRODUCT_LIST_REMOVE_SUCCESS,
         payload: data.data,
       });
       cb(data.message, 'success');

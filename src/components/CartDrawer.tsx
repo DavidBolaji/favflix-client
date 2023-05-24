@@ -69,7 +69,7 @@ export const CartDrawer: React.FC<IcartDrawer> = ({ open, onClose }) => {
               <button
                 type="button"
                 onClick={() => handleCheckout(total)}
-                className="mx-auto flex text-white items-center justify-center w-full bg-[#feb517] h-10"
+                className="mx-auto flex text-white items-center justify-center w-full bg-[#cb104a] h-10"
               >
                 CHECKOUT
               </button>
@@ -88,9 +88,11 @@ export const CartDrawer: React.FC<IcartDrawer> = ({ open, onClose }) => {
             />
           </div>
         )}
-        {cart.map((item: any) => {
-          return <CartCard key={item._id} item={item} checkout={true} />;
-        })}
+        <div className="max-h-[300px] overscroll-auto">
+          {cart.map((item: any) => {
+            return <CartCard key={item._id} item={item} checkout={true} />;
+          })}
+        </div>
       </Drawer>
     </>
   );

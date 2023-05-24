@@ -274,7 +274,7 @@ const PurchaseComponent: React.FC = () => {
                             return;
                           }
                         }}
-                        className="hover:border-[#feb517] hover:border rounded-md mb-3 w-full bg-white border border-[#d9d9d9] py-2"
+                        className="hover:border-[#cb104a] hover:border rounded-md mb-3 w-full bg-white border border-[#d9d9d9] py-2"
                       />
                       {errors.phone && touched.phone && (
                         <>
@@ -293,10 +293,10 @@ const PurchaseComponent: React.FC = () => {
                         type="submit"
                         style={{
                           backgroundColor: loading ? '#fafafa' : '',
-                          border: loading ? '1px solid #feb517' : '',
+                          border: loading ? '1px solid #cb104a' : '',
                         }}
                         //   onClick={SW?.nextStep}
-                        className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                        className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                       >
                         {loading ? <Spin indicator={antIcon} /> : 'Save'}
                       </button>
@@ -322,14 +322,14 @@ const PurchaseComponent: React.FC = () => {
               <button
                 type="button"
                 onClick={SW?.previousStep}
-                className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
               >
                 Previous
               </button>
               <button
                 type="button"
                 onClick={order}
-                className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
               >
                 {loading ? <Spin indicator={antIcon} /> : 'Next'}
               </button>
@@ -350,7 +350,7 @@ const PurchaseComponent: React.FC = () => {
               <button
                 type="button"
                 onClick={SW?.previousStep}
-                className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
               >
                 Previous
               </button>
@@ -359,9 +359,9 @@ const PurchaseComponent: React.FC = () => {
                   <button
                     style={{
                       backgroundColor: loading ? '#fafafa' : '',
-                      border: loading ? '1px solid #feb517' : '',
+                      border: loading ? '1px solid #cb104a' : '',
                     }}
-                    className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                    className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                     onClick={() => {
                       setLoading(true);
                       initializePayment(onSuccess, onClose);

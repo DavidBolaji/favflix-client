@@ -1,11 +1,13 @@
 import { Action } from 'redux';
 import {
   PRODUCT_LIST_ERROR,
+  PRODUCT_LIST_REMOVE_SUCCESS,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
 } from '../constants/constants';
 
 export interface IProduct {
+  _id?: string;
   title: string;
   img: string;
   amount: number;
@@ -30,6 +32,15 @@ export const productListReducer = (
       return { ...state, loading: true };
     case PRODUCT_LIST_SUCCESS:
       return { loading: false, products: [...action.payload] };
+    case PRODUCT_LIST_REMOVE_SUCCESS:
+      const products = state.products!.filter(
+        (product: IProduct) => product._id !== action.payload._id
+      );
+      return {
+        ...state,
+        loading: false,
+        products: [...products],
+      };
     case PRODUCT_LIST_ERROR:
       return { loading: false, error: action.payload };
     default:

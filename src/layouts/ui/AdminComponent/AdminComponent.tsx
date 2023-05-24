@@ -68,6 +68,7 @@ const AdminComponent: React.FC<{ admin: boolean }> = ({ admin }) => {
     setPage('view');
 
     setInit({ ...start });
+    setCount((prev) => prev + 1);
   };
 
   return (

@@ -47,7 +47,6 @@ const CreateForm: React.FC<IcreateForm> = ({ init, onSuccess }) => {
         { ...values, img: image === '' ? values.img : image },
         (cb, res) => {
           if (res === 'success') {
-            // return message.success(cb);
             toast.success(cb, {
               position: 'top-right',
               autoClose: 5000,
@@ -197,7 +196,7 @@ const CreateForm: React.FC<IcreateForm> = ({ init, onSuccess }) => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="bg-[#feb517] w-full text-center py-2 rounded-md font-bold uppercase border-none"
+                    className="bg-[#cb104a] text-white w-full text-center py-2 rounded-md font-bold uppercase border-none"
                   >
                     {init.title ? 'Update Product' : 'Create Product'}
                   </button>

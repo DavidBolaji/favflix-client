@@ -24,7 +24,7 @@ const SearchInput: React.FC<Isearch> = ({
       />
       <Button
         onClick={onClick}
-        className="bg-[#feb517]  font-bold uppercase border-none"
+        className="bg-[#cb104a] text-white font-bold uppercase border-none"
       >
         {btnText}
       </Button>

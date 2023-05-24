@@ -204,7 +204,7 @@ const PurchaseComponent: React.FC = () => {
       >
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
           <div className="">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-4">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl bg-white">
               Details
             </h1>
             <Formik
@@ -309,8 +309,8 @@ const PurchaseComponent: React.FC = () => {
         </div>
 
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
-          <div className="">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
+          <div className="bg-white">
+            <h1 className="text-xl font-bold bg-white leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
               CONFIRM DETAILS
             </h1>
             <div>
@@ -337,7 +337,7 @@ const PurchaseComponent: React.FC = () => {
           </div>
         </div>
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
-          <div className="">
+          <div className="bg-white">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
               Pay
             </h1>
@@ -383,7 +383,6 @@ const PurchaseComponent: React.FC = () => {
         {cart.map((item: any) => {
           return <CartCard key={item._id} item={item} checkout={false} />;
         })}
-        <div className="hidden"></div>
       </div>
     </section>
   );

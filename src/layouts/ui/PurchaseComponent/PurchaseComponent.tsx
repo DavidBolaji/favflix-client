@@ -204,7 +204,7 @@ const PurchaseComponent: React.FC = () => {
       >
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
           <div className="">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl bg-white">
+            <h1 className="text-xl bg-white font-bold leading-tight tracking-tight text-gray-900 md:text-2xl bg-white">
               Details
             </h1>
             <Formik
@@ -225,8 +225,8 @@ const PurchaseComponent: React.FC = () => {
                 values,
               }) => {
                 return (
-                  <form noValidate onSubmit={handleSubmit}>
-                    <div className="w-full">
+                  <form noValidate onSubmit={handleSubmit} className="bg-white">
+                    <div className="w-full bg-white">
                       <label htmlFor="fname">Address</label>
                       <Input
                         type="text"
@@ -247,7 +247,7 @@ const PurchaseComponent: React.FC = () => {
                         />
                       )}
                     </div>
-                    <div>
+                    <div className="bg-white">
                       <label htmlFor="phone">Contact Phone Number</label>
 
                       <StyledPhoneInput
@@ -288,7 +288,7 @@ const PurchaseComponent: React.FC = () => {
                         </>
                       )}
                     </div>
-                    <div className="w-full">
+                    <div className="w-full bg-white">
                       <button
                         type="submit"
                         style={{
@@ -313,12 +313,12 @@ const PurchaseComponent: React.FC = () => {
             <h1 className="text-xl font-bold bg-white leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
               CONFIRM DETAILS
             </h1>
-            <div>
+            <div className="bg-white">
               <p className="my-2">Email: {user.email}</p>
               <p className="my-2">Phone Number: {address.phone}</p>
               <p className="my-2">Address: {address.address}</p>
             </div>
-            <div className="w-full flex gap-3 mt-10 mb-10">
+            <div className="w-full flex gap-3 mt-10 mb-10 bg-white">
               <button
                 type="button"
                 onClick={SW?.previousStep}
@@ -338,15 +338,15 @@ const PurchaseComponent: React.FC = () => {
         </div>
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
           <div className="bg-white">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
+            <h1 className="bg-white text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl mb-4">
               Pay
             </h1>
-            <div>
+            <div className="bg-white">
               <p className="my-2">Email: {user.email}</p>
               <p className="my-2">Phone Number: {address.phone}</p>
               <p className="my-2">Address: {address.address}</p>
             </div>
-            <div className="w-full flex gap-3 mt-10 mb-10">
+            <div className="w-full flex gap-3 mt-10 mb-10 bg-white">
               <button
                 type="button"
                 onClick={SW?.previousStep}

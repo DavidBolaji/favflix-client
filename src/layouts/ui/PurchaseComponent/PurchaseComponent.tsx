@@ -204,7 +204,7 @@ const PurchaseComponent: React.FC = () => {
       >
         <div className="w-full bg-white rounded-lg xl:p-0 dark:bg-gray-800 md:px-10 mt-10">
           <div className="">
-            <h1 className="text-xl bg-white font-bold leading-tight tracking-tight text-gray-900 md:text-2xl bg-white">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl bg-white">
               Details
             </h1>
             <Formik

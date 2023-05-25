@@ -9,10 +9,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const HeroMain: React.FC = () => {
   return (
     <section className="grid grid-cols-4 grid-rows-4 gap-3 md:h-[375px] mt-12 md:mt-24 mb-9">
-      <div className="bg-[#ffde59] md:col-start-1 md:col-end-2 col-span-2 row-span-2 rounded-md p-1">
+      <div className="bg-[#920d36] md:col-start-1 md:col-end-2 col-span-2 row-span-2 rounded-md p-1">
         <LazyLoadImage
           src={images.card1}
-          className="w-full h-full mx-auto object-cover"
+          className="w-full h-full mx-auto object-contain"
         />
       </div>
       <div className="col-start-1 md:col-start-2 col-end-5 row-span-6 row-start-1 row-end-3 rounded-md md:h-[375px] overflow-hidden">
@@ -31,7 +31,7 @@ const HeroMain: React.FC = () => {
           </div>
         </Carousel>
       </div>
-      <div className="bg-yellow-500 md:col-start-1 md:col-end-2 col-span-2 row-span-2 rounded-md p-1">
+      <div className="bg-[#920d36] md:col-start-1 md:col-end-2 col-span-2 row-span-2 rounded-md p-1">
         <img src={images.card2} className="w-full h-full object-cover" />
       </div>
     </section>

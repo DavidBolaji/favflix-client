@@ -83,7 +83,7 @@ const PurchaseComponent: React.FC = () => {
           email: address.email,
           address: address.address,
           product: cart,
-          price: +total.replace('₦', '').replace(',', ''),
+          price: +total.replace('₦', '').replace(',', '') + 2500,
           status: 'processing',
           paid: true,
           delivered: false,
@@ -162,7 +162,7 @@ const PurchaseComponent: React.FC = () => {
           email: address.email,
           address: address.address,
           product: cart,
-          price: +total.replace('₦', '').replace(',', ''),
+          price: +total.replace('₦', '').replace(',', '') + 2500,
           status: 'waiting',
           paid: false,
           delivered: false,
@@ -174,7 +174,7 @@ const PurchaseComponent: React.FC = () => {
               ...config,
               reference: Date.now().toString(),
               email: address.email,
-              amount: +total.replace('₦', '').replace(',', '') * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+              amount: (+total.replace('₦', '').replace(',', '') + 2500) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
             });
 
             setCalb(cb);
@@ -348,6 +348,13 @@ const PurchaseComponent: React.FC = () => {
               <p className="my-2">Email: {user.email}</p>
               <p className="my-2">Phone Number: {address.phone}</p>
               <p className="my-2">Address: {address.address}</p>
+              <p className="my-2">
+                Total: {total} + Delivery Fee ₦2,500.00 ={' '}
+                {new Intl.NumberFormat('en-NG', {
+                  style: 'currency',
+                  currency: 'NGN',
+                }).format(+total.replace('₦', '').replace(',', '') + 2500)}
+              </p>
             </div>
             <div className="w-full flex gap-3 mt-10 mb-10 bg-white">
               <button
@@ -371,7 +378,15 @@ const PurchaseComponent: React.FC = () => {
                       setCount((prev) => prev + 1);
                     }}
                   >
-                    {loading ? <Spin indicator={antIcon} /> : 'Pay ' + total}
+                    {loading ? (
+                      <Spin indicator={antIcon} />
+                    ) : (
+                      'Pay ' +
+                      new Intl.NumberFormat('en-NG', {
+                        style: 'currency',
+                        currency: 'NGN',
+                      }).format(+total.replace('₦', '').replace(',', '') + 2500)
+                    )}
                   </button>
                 )}
               </PaystackConsumer>

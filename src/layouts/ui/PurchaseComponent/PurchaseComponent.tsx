@@ -30,8 +30,11 @@ const PurchaseComponent: React.FC = () => {
     reference: '',
     email: '',
     amount: 0, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC,
-    subaccount: import.meta.env.VITE_PAYSTACK_SUB,
+    publicKey:
+      import.meta.env.VITE_ENV === 'dev'
+        ? import.meta.env.VITE_PAYSTACK_PUBLIC
+        : import.meta.env.VITE_PAYSTACK_PUBLIC_PROD,
+    // subaccount: import.meta.env.VITE_PAYSTACK_SUB,
   });
 
   const navigate = useNavigate();

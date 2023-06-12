@@ -46,6 +46,7 @@ const ViewProduct: React.FC<IView> = ({ change }) => {
       key: 'amount',
       className: 'px-4 py-2',
     },
+
     {
       title: 'Action',
       key: 'action',

@@ -10,6 +10,9 @@ import { Tag, Space, Table, Badge, Switch, Alert } from 'antd';
 import { FiClock } from 'react-icons/fi';
 import { SyncOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+// import Moment from 'react-moment';
+// import 'moment-timezone';
 
 const OrderProduct: React.FC = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -65,6 +68,14 @@ const OrderProduct: React.FC = () => {
           })}
         </Space>
       ),
+    },
+    {
+      title: 'Time',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      className: 'px-4 py-2',
+      render: (_text: string, _record: any) =>
+        moment(_record.createdAt).format('LLL'),
     },
     {
       title: 'Payment',

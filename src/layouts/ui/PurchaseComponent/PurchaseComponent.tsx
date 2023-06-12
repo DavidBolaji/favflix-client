@@ -46,10 +46,10 @@ const PurchaseComponent: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [, setCount] = useState(0);
   const dispatch: Dispatch<any> = useDispatch();
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector((state: any) => state?.user?.user);
   const initial: { address: string; email?: string; phone: string } = {
     ...address,
-    phone: address.phone !== '' ? address.phone : user.phone,
+    phone: address?.phone !== '' ? address?.phone : user?.phone,
   };
 
   const total = new Intl.NumberFormat('en-NG', {

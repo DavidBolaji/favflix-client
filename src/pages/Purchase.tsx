@@ -4,7 +4,7 @@ import { Alert } from 'antd';
 
 const Purchase: React.FC = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-32">
       <Alert
         message="All orders after 4pm will be delivered next day"
         type="warning"

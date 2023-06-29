@@ -83,91 +83,93 @@ const HeaderComponent: React.FC = () => {
   };
   // const handleClick = (e: SyntheticEvent) => {};
   return (
-    <nav className="fixed h-10 md:h-16 flex items-center top-0 bg-white shadow w-full z-50">
-      <Wrapper>
-        <Row className="w-full flex items-center">
-          <Col span={6} className="flex items-center">
-            <Space className="w-full">
-              <span>
-                <img
-                  src={images.Logo}
-                  className="md:w-16 w-10"
-                  alt="logo-favfleeks"
-                />
-              </span>
-              {screen.md && (
-                <SearchInput
-                  placeholder="Search food items"
-                  onClick={() => console.log('search')}
-                  btnText="Search"
-                  {...styles}
-                />
-              )}
-            </Space>
-          </Col>
-          {screen.md ? (
-            <Col
-              span={6}
-              className="flex w-full h-auto py-auto justify-end ml-auto"
-            >
-              <Menu
-                onClick={onClick}
-                // selectedKeys={[current]}
-                mode="horizontal"
-                items={[
-                  ...items,
-                  typeof user.fname === 'undefined'
-                    ? {
-                        label: 'Login',
-                        key: 'login',
-                        icon: <FiLogIn />,
-                      }
-                    : {
-                        label: '',
-                        key: 'subMenu',
-                        icon: (
-                          <Avatar
-                            className="mt-2"
-                            src="https://www.asiamediajournal.com/wp-content/uploads/2022/11/Default-PFP-profile-287x300.png"
-                          />
-                        ),
-                        children: [
-                          {
-                            label: 'Orders',
-                            key: 'orders',
-                            icon: <FiBriefcase />,
-                          },
-                          {
-                            label: 'Logout',
-                            key: 'logout',
-                            icon: <FiLogIn />,
-                          },
-                        ],
-                      },
-                ]}
-              />
+    <>
+      <nav className="fixed h-10 md:h-16 flex items-center top-10 bg-white shadow w-full z-50">
+        <Wrapper>
+          <Row className="w-full flex items-center">
+            <Col span={6} className="flex items-center">
+              <Space className="w-full">
+                <span>
+                  <img
+                    src={images.Logo}
+                    className="md:w-16 w-10"
+                    alt="logo-favfleeks"
+                  />
+                </span>
+                {screen.md && (
+                  <SearchInput
+                    placeholder="Search food items"
+                    onClick={() => console.log('search')}
+                    btnText="Search"
+                    {...styles}
+                  />
+                )}
+              </Space>
             </Col>
-          ) : (
-            <Col
-              span={6}
-              className="cursor-pointer flex w-full h-auto py-auto justify-end ml-auto"
-            >
-              <FiMenu onClick={() => setOpen(true)} />
-            </Col>
-          )}
-          <RenderDrawer
-            open={isOpen}
-            setOpen={() => setOpen((prev) => !prev)}
-            user={user}
-          />
-        </Row>
-      </Wrapper>
-      <CartDrawer
-        open={open}
-        placement="left"
-        onClose={() => setOpen2(false)}
-      />
-    </nav>
+            {screen.md ? (
+              <Col
+                span={6}
+                className="flex w-full h-auto py-auto justify-end ml-auto"
+              >
+                <Menu
+                  onClick={onClick}
+                  // selectedKeys={[current]}
+                  mode="horizontal"
+                  items={[
+                    ...items,
+                    typeof user.fname === 'undefined'
+                      ? {
+                          label: 'Login',
+                          key: 'login',
+                          icon: <FiLogIn />,
+                        }
+                      : {
+                          label: '',
+                          key: 'subMenu',
+                          icon: (
+                            <Avatar
+                              className="mt-2"
+                              src="https://www.asiamediajournal.com/wp-content/uploads/2022/11/Default-PFP-profile-287x300.png"
+                            />
+                          ),
+                          children: [
+                            {
+                              label: 'Orders',
+                              key: 'orders',
+                              icon: <FiBriefcase />,
+                            },
+                            {
+                              label: 'Logout',
+                              key: 'logout',
+                              icon: <FiLogIn />,
+                            },
+                          ],
+                        },
+                  ]}
+                />
+              </Col>
+            ) : (
+              <Col
+                span={6}
+                className="cursor-pointer flex w-full h-auto py-auto justify-end ml-auto"
+              >
+                <FiMenu onClick={() => setOpen(true)} />
+              </Col>
+            )}
+            <RenderDrawer
+              open={isOpen}
+              setOpen={() => setOpen((prev) => !prev)}
+              user={user}
+            />
+          </Row>
+        </Wrapper>
+        <CartDrawer
+          open={open}
+          placement="left"
+          onClose={() => setOpen2(false)}
+        />
+      </nav>
+    </>
   );
 };
 

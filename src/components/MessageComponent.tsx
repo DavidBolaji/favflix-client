@@ -8,6 +8,7 @@ const MessageComponent: React.FC = () => {
         phoneNumber="09036114805"
         accountName="Fleeks"
         statusMessage="welcome to fleeks grocery store"
+        onSubmit={() => window.open('https://wa.me/+2349036114805')}
         allowEsc
         allowClickAway
         notification

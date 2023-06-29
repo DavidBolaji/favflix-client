@@ -89,7 +89,7 @@ const HeaderComponent: React.FC = () => {
           <Row className="w-full flex items-center">
             <Col span={6} className="flex items-center">
               <Space className="w-full">
-                <span>
+                <span onClick={() => navigate('/')} className="cursor-pointer">
                   <img
                     src={images.Logo}
                     className="md:w-16 w-10"

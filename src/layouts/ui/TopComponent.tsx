@@ -5,8 +5,8 @@ import { FiMail, FiPhone } from 'react-icons/fi';
 const TopComponent: React.FC = () => {
   return (
     <div className="px-5 flex items-center justify-between fixed z-[50] top-0 py-5  w-full bg-white shadow h-[3vh]">
-      <h3 className="font uppercase md:text-xl text-[10px] md:w-auto w-32 mt-2 md:mt-0 ">
-        Fleeck grocery store
+      <h3 className="font uppercase md:text-xl text-[9px] md:w-auto w-32 mt-2 md:mt-0 ">
+        Fleeks grocery store
       </h3>
       <div className="flex item-center">
         <Space

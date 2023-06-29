@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HeroMain: React.FC = () => {
   return (
-    <section className="grid grid-cols-4 grid-rows-4 gap-3 md:h-[375px] mt-12 md:mt-32 mb-9">
+    <section className="grid grid-cols-4 grid-rows-4 gap-3 md:h-[375px] mt-[12vh] md:mt-32 mb-9">
       <div className="bg-[#920d36] md:col-start-1 md:col-end-2 col-span-2 row-span-2 rounded-md p-1">
         <LazyLoadImage
           src={images.card1}

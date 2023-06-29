@@ -5,10 +5,10 @@ import { FiMail, FiPhone } from 'react-icons/fi';
 const TopComponent: React.FC = () => {
   return (
     <div className="px-5 flex items-center justify-between fixed z-[50] top-0 py-5  w-full bg-white shadow h-[3vh]">
-      <h3 className="font uppercase md:text-xl text-[9px] md:w-auto w-32 mt-2 md:mt-0 ">
+      {/* <h3 className="font uppercase md:text-xl text-[9px] md:w-auto w-32 mt-2 md:mt-0 ">
         Fleeks grocery store
-      </h3>
-      <div className="flex item-center">
+      </h3> */}
+      <div className="flex item-center ml-auto">
         <Space
           className="md:mr-5 mr-2 cursor-pointer"
           onClick={() => window.open('tel:09036114805')}

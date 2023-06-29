@@ -3,7 +3,7 @@ import type { MenuProps } from 'antd';
 import { FiBriefcase, FiLogIn, FiMenu } from 'react-icons/fi';
 import Wrapper from './Wrapper';
 import CartComponent from '../../components/CartComponent';
-import SearchInput from '../../components/SearchInput';
+// import SearchInput from '../../components/SearchInput';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../../constants/image';
@@ -21,9 +21,9 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const styles = {
-  className: 'border-2 border-[#aaaaaa]  hover:border-2 hover:border-[#aaaaaa]',
-};
+// const styles = {
+//   className: 'border-2 border-[#aaaaaa]  hover:border-2 hover:border-[#aaaaaa]',
+// };
 const { useBreakpoint } = Grid;
 
 const HeaderComponent: React.FC = () => {
@@ -87,25 +87,28 @@ const HeaderComponent: React.FC = () => {
       <nav className="fixed h-10 md:h-16 flex items-center top-10 bg-white shadow w-full z-50">
         <Wrapper>
           <Row className="w-full flex items-center">
-            <Col span={6} className="flex items-center">
-              <Space className="w-full">
-                <span onClick={() => navigate('/')} className="cursor-pointer">
+            <Col span={screen.md ? 1 : 3}>
+              <Space className="flex">
+                <div onClick={() => navigate('/')} className="cursor-pointer">
                   <img
                     src={images.Logo}
                     className="md:w-16 w-10"
                     alt="logo-favfleeks"
                   />
-                </span>
-                {screen.md && (
+                </div>
+                {/* {screen.md && (
                   <SearchInput
                     placeholder="Search food items"
                     onClick={() => console.log('search')}
                     btnText="Search"
                     {...styles}
                   />
-                )}
+                )} */}
               </Space>
             </Col>
+            <span className="font whitespace-nowrap uppercase md:text-xl text-[9px] inline-block ml-2 md:ml-3 md:mt-0 ">
+              Fleeks grocery store
+            </span>
             {screen.md ? (
               <Col
                 span={6}
@@ -153,7 +156,17 @@ const HeaderComponent: React.FC = () => {
                 span={6}
                 className="cursor-pointer flex w-full h-auto py-auto justify-end ml-auto"
               >
-                <FiMenu onClick={() => setOpen(true)} />
+                <div className="flex item-center">
+                  <Menu
+                    onClick={onClick}
+                    // selectedKeys={[current]}
+                    style={{ transform: 'scale(0.8)' }}
+                    items={[...items]}
+                  />
+                  <div className="flex  items-center">
+                    <FiMenu onClick={() => setOpen(true)} />
+                  </div>
+                </div>
               </Col>
             )}
             <RenderDrawer
@@ -241,23 +254,23 @@ const RenderDrawer: React.FC<Idrawer> = ({ open, setOpen, user }) => {
       height={250}
       onClose={() => setOpen()}
       open={open}
-      extra={
-        <Space>
-          <SearchInput
-            placeholder="Search food items"
-            onClick={() => console.log('first')}
-            btnText="Search"
-            {...styles}
-          />
-        </Space>
-      }
+      // extra={
+      //   <Space>
+      //     <SearchInput
+      //       placeholder="Search food items"
+      //       onClick={() => console.log('first')}
+      //       btnText="Search"
+      //       {...styles}
+      //     />
+      //   </Space>
+      // }
     >
       <Menu
         onClick={onClick}
         // selectedKeys={[current]}
         mode="inline"
         items={[
-          ...items,
+          // ...items,
           typeof user.fname === 'undefined'
             ? {
                 label: 'Login',

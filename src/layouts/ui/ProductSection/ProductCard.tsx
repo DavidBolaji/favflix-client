@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addToCart } from '../../../actions/cartActions';
 import { toast } from 'react-toastify';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Iproduct {
   id: string;
   title: string;
@@ -30,11 +31,18 @@ const ProductCard: React.FC<Iproduct> = ({ title, amount, img, id }) => {
   return (
     <div className=" h-[300px]">
       <div className="h-1/2 overflow-hidden rounded-md shadow">
-        <img
-          src={img}
+        <LazyLoadImage
           alt={title}
-          className="w-full h-full object-scale-down"
+          // effect="blur"
+          // height={image.height}
+          src={img} // use normal <img> attributes as props
+          // width={image.width}
         />
+        {/* <img
+        //   src={img}
+        //   alt={title}
+        //   className="w-full h-full object-scale-down"
+         /> */}
       </div>
       <div className="mt-4">
         <h4 className="font-bold ">{title}</h4>

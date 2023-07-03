@@ -33,10 +33,15 @@ const ProductCard: React.FC<Iproduct> = ({ title, amount, img, id }) => {
       <div className="h-1/2 overflow-hidden rounded-md shadow">
         <LazyLoadImage
           alt={title}
+          style={{
+            objectFit: 'contain',
+            height: 150,
+            width: '100%',
+            transform: 'scale(0.9)',
+          }}
           // effect="blur"
-          // height={image.height}
           src={img} // use normal <img> attributes as props
-          // width={image.width}
+          // width={200}
         />
         {/* <img
         //   src={img}
